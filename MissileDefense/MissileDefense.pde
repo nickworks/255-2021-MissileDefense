@@ -2,6 +2,8 @@
 Player thePlayer;
 GameObject background;
 
+ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+
 // this function is called exactly once:
 void setup() {
   size(700, 800); // set size of window
@@ -10,6 +12,12 @@ void setup() {
   background = new GameObject( loadImage("space.png") );
   background.position.x = width/2;
   background.position.y = height/2;
+  
+  for(int i = 0; i < 10; i++){
+     Asteroid a = new Asteroid();
+     asteroids.add(a);
+  }
+  
 }
 
 // This function is called every 1/60th of a second.
@@ -27,6 +35,7 @@ void draw() {
   // Update all game objects
 
   // This is essentially the "Update" design pattern:
+  for(Asteroid a : asteroids) a.update();
   thePlayer.update();
 
 
@@ -34,6 +43,7 @@ void draw() {
   // Render all game objects
   background(0);
   background.draw();
+  for(Asteroid a : asteroids) a.draw();
   thePlayer.draw();
 }
 
